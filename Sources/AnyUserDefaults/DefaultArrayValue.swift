@@ -14,7 +14,7 @@ public protocol DefaultArrayValue {
     static func readArray(for key: String, userDefaults: UserDefaults) -> [Self]?
 }
 
-// MARK: Int
+// MARK: - Int
 
 extension Int: DefaultArrayValue {
     
@@ -27,7 +27,7 @@ extension Int: DefaultArrayValue {
     }
 }
 
-// MARK: Float
+// MARK: - Float
 
 extension Float: DefaultArrayValue {
     
@@ -40,7 +40,7 @@ extension Float: DefaultArrayValue {
     }
 }
 
-// MARK: Double
+// MARK: - Double
 
 extension Double: DefaultArrayValue {
     
@@ -53,7 +53,7 @@ extension Double: DefaultArrayValue {
     }
 }
 
-// MARK: String
+// MARK: - String
 
 extension String: DefaultArrayValue {
     
@@ -66,7 +66,7 @@ extension String: DefaultArrayValue {
     }
 }
 
-// MARK: URL
+// MARK: - URL
 
 extension URL: DefaultArrayValue {
     
@@ -97,7 +97,7 @@ extension URL: DefaultArrayValue {
     }
 }
 
-// MARK: Date
+// MARK: - Date
 
 extension Date: DefaultArrayValue {
     
@@ -110,7 +110,20 @@ extension Date: DefaultArrayValue {
     }
 }
 
-// MARK: Codable
+// MARK: - RawRepresentable
+
+extension DefaultArrayValue where Self: RawRepresentable, RawValue: DefaultArrayValue {
+    
+    public static func writeArray(value: [Self]?, for key: String, userDefaults: UserDefaults) {
+        RawValue.writeArray(value: value?.map { $0.rawValue }, for: key, userDefaults: userDefaults)
+    }
+    
+    public static func readArray(for key: String, userDefaults: UserDefaults) -> [Self]? {
+        return RawValue.readArray(for: key, userDefaults: userDefaults)?.compactMap { Self.init(rawValue: $0) }
+    }
+}
+
+// MARK: - Codable
 
 extension DefaultArrayValue where Self: Codable {
     

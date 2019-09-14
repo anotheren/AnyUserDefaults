@@ -27,6 +27,9 @@ final class AnyUserDefaultsTests: XCTestCase {
     @UserDefault(keyPath: \.codableKey, default: CustomCodable.random())
     var codable: CustomCodable
     
+    @UserDefault(keyPath: \.rawRepresentableKey, default: .first)
+    var rawRepresentable: CustomRawRepresentable
+    
     @UserDefault(keyPath: \.intArrayKey, default: [6, 7, 1, 7, 1, 3, 7, 3, 3, 6, 5, 6, 1, 5])
     var intArray: [Int]
     
@@ -53,6 +56,9 @@ final class AnyUserDefaultsTests: XCTestCase {
                                                        CustomCodable.random(),
                                                        CustomCodable.random()])
     var codableArray: [CustomCodable]
+    
+    @UserDefault(keyPath: \.rawRepresentableArrayKey, default: [.first, .second, .third])
+    var rawRepresentableArray: [CustomRawRepresentable]
     
     func testInt() {
         _int.remove()
@@ -108,6 +114,14 @@ final class AnyUserDefaultsTests: XCTestCase {
         let newValue = CustomCodable.random()
         codable = newValue
         XCTAssert(codable == newValue)
+    }
+    
+    func testRawRepresentable() {
+        _rawRepresentable.remove()
+        XCTAssert(rawRepresentable == _rawRepresentable.defaultValue)
+        let newValue: CustomRawRepresentable = .third
+        rawRepresentable = newValue
+        XCTAssert(rawRepresentable == newValue)
     }
     
     func testIntArray() {
@@ -171,6 +185,14 @@ final class AnyUserDefaultsTests: XCTestCase {
         XCTAssert(codableArray == newValue)
     }
     
+    func testRawRepresentableArray() {
+        _rawRepresentableArray.remove()
+        XCTAssert(rawRepresentableArray == _rawRepresentableArray.defaultValue)
+        let newValue: [CustomRawRepresentable] = [.third, .second, .first]
+        rawRepresentableArray = newValue
+        XCTAssert(rawRepresentableArray == newValue)
+    }
+    
     static var allTests = [
         ("testInt", testInt),
         ("testFloat", testFloat),
@@ -200,6 +222,7 @@ extension DefaultKeyStore {
     var dateKey: DefaultKey<Date> { .init("date_key") }
     var dictronaryKey: DefaultKey<[String: Any]> { .init("dictronary_key") }
     var codableKey: DefaultKey<CustomCodable> { .init("custom_codable_key") }
+    var rawRepresentableKey: DefaultKey<CustomRawRepresentable> { .init("rawrepresentable_key") }
     
     var intArrayKey: DefaultKey<[Int]> { .init("int_array_key") }
     var floatArrayKey: DefaultKey<[Float]> { .init("float_array_key") }
@@ -208,6 +231,7 @@ extension DefaultKeyStore {
     var urlArrayKey: DefaultKey<[URL]> { .init("url_array_key") }
     var dateArrayKey: DefaultKey<[Date]> { .init("date_array_key") }
     var codableArrayKey: DefaultKey<[CustomCodable]> { .init("codable_array_key") }
+    var rawRepresentableArrayKey: DefaultKey<[CustomRawRepresentable]> { .init("rawrepresentable_array_key") }
 }
 
 struct CustomCodable: Codable, Equatable, DefaultValue, DefaultArrayValue {
@@ -223,4 +247,11 @@ struct CustomCodable: Codable, Equatable, DefaultValue, DefaultArrayValue {
                              double: Double.random(in: Double.leastNonzeroMagnitude...Double.greatestFiniteMagnitude),
                              stinrg: "Ramdom")
     }
+}
+
+enum CustomRawRepresentable: Int, DefaultValue, DefaultArrayValue {
+    
+    case first
+    case second
+    case third
 }

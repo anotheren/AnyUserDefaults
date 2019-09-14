@@ -14,7 +14,7 @@ public protocol DefaultValue {
     static func read(for key: String, userDefaults: UserDefaults) -> Self?
 }
 
-// MARK: Int
+// MARK: - Int
 
 extension Int: DefaultValue {
 
@@ -27,7 +27,7 @@ extension Int: DefaultValue {
     }
 }
 
-// MARK: Float
+// MARK: - Float
 
 extension Float: DefaultValue {
 
@@ -40,7 +40,7 @@ extension Float: DefaultValue {
     }
 }
 
-// MARK: Double
+// MARK: - Double
 
 extension Double: DefaultValue {
 
@@ -53,7 +53,7 @@ extension Double: DefaultValue {
     }
 }
 
-// MARK: String
+// MARK: - String
 
 extension String: DefaultValue {
 
@@ -66,7 +66,7 @@ extension String: DefaultValue {
     }
 }
 
-// MARK: URL
+// MARK: - URL
 
 extension URL: DefaultValue {
 
@@ -79,7 +79,7 @@ extension URL: DefaultValue {
     }
 }
 
-// MARK: Date
+// MARK: - Date
 
 extension Date: DefaultValue {
     
@@ -92,7 +92,7 @@ extension Date: DefaultValue {
     }
 }
 
-// MARK: Dictionary
+// MARK: - Dictionary
 
 extension Dictionary: DefaultValue where Key == String, Value == Any {
     
@@ -105,7 +105,7 @@ extension Dictionary: DefaultValue where Key == String, Value == Any {
     }
 }
 
-// MARK: Array
+// MARK: - Array
 
 extension Array: DefaultValue where Element: DefaultArrayValue {
 
@@ -118,7 +118,23 @@ extension Array: DefaultValue where Element: DefaultArrayValue {
     }
 }
 
-// MARK: Codable
+// MARK: - RawRepresentable
+
+extension DefaultValue where Self: RawRepresentable, RawValue: DefaultValue {
+    
+    public static func write(value: Self?, for key: String, userDefaults: UserDefaults) {
+        RawValue.write(value: value?.rawValue, for: key, userDefaults: userDefaults)
+    }
+
+    public static func read(for key: String, userDefaults: UserDefaults) -> Self? {
+        if let rawValue =  RawValue.read(for: key, userDefaults: userDefaults) {
+            return Self(rawValue: rawValue)
+        }
+        return nil
+    }
+}
+
+// MARK: - Codable
 
 extension DefaultValue where Self: Codable {
     
