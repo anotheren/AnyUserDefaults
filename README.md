@@ -111,3 +111,28 @@ enum MyRawRepresentableType: Int, DefaultValue {
 }
 ```
 
+## Installation
+
+### CocoaPods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```
+pod 'AnyUserDefaults', '~> 1.0.0'
+```
+
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the swift compiler. It is in early development, but Alamofire does support its use on supported platforms.
+
+Once you have your Swift package set up, adding AnyUserDefaults as a dependency is as easy as adding it to the dependencies value of your Package.swift.
+
+```
+dependencies: [
+    .package(url: "https://github.com/anotheren/AnyUserDefaults.git", from: "1.0.0")
+]
+```
+
+## License
+
+AnyUserDefaults is released under the MIT license. See [LICENSE](./LICENSE) for details.
