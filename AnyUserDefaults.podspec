@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   
     s.swift_versions = ['5.1']
   
-    s.source_files = 'Source/AnyUserDefaults/*.swift'
+    s.source_files = 'Sources/AnyUserDefaults/*.swift'
   
     s.frameworks = 'Foundation'
   end
