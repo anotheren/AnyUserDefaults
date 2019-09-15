@@ -53,6 +53,19 @@ extension Double: DefaultValue {
     }
 }
 
+// MARK: - Bool
+
+extension Bool: DefaultValue {
+
+    public static func write(value: Bool?, for key: String, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func read(for key: String, userDefaults: UserDefaults) -> Bool? {
+        return userDefaults.object(forKey: key) as? Bool
+    }
+}
+
 // MARK: - String
 
 extension String: DefaultValue {
@@ -89,6 +102,19 @@ extension Date: DefaultValue {
 
     public static func read(for key: String, userDefaults: UserDefaults) -> Date? {
         return userDefaults.object(forKey: key) as? Date
+    }
+}
+
+// MARK: - Data
+
+extension Data: DefaultValue {
+    
+    public static func write(value: Data?, for key: String, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+
+    public static func read(for key: String, userDefaults: UserDefaults) -> Data? {
+        return userDefaults.data(forKey: key)
     }
 }
 

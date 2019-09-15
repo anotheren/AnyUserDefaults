@@ -12,6 +12,9 @@ final class AnyUserDefaultsTests: XCTestCase {
     @UserDefault(keyPath: \.doubleKey, default: .infinity, policy: .cached)
     var double: Double
     
+    @UserDefault(keyPath: \.boolKey, default: false)
+    var bool: Bool
+    
     @UserDefault(keyPath: \.urlKey, default: URL(string: "https://anotheren.com")!)
     var url: URL
     
@@ -20,6 +23,9 @@ final class AnyUserDefaultsTests: XCTestCase {
     
     @UserDefault(keyPath: \.dateKey, default: .init())
     var date: Date
+    
+    @UserDefault(keyPath: \.dataKey, default: Data([0xFF, 0xFB, 0xFC]))
+    var data: Data
     
     @UserDefault(keyPath: \.dictronaryKey, default: ["Tel": 120])
     var dictronary: [String: Any]
@@ -39,6 +45,9 @@ final class AnyUserDefaultsTests: XCTestCase {
     @UserDefault(keyPath: \.doubleArrayKey, default: [6, 7, 1, 7, 1, 3, 7, 3, 3, 6, 5, 6, 1, 5])
     var doubleArray: [Double]
     
+    @UserDefault(keyPath: \.boolArrayKey, default: [true, false, false, true])
+    var boolArray: [Bool]
+    
     @UserDefault(keyPath: \.stringArrayKey, default: ["I", "am", "not", "a", "robot", "!"])
     var stringArray: [String]
     
@@ -51,6 +60,10 @@ final class AnyUserDefaultsTests: XCTestCase {
                                                     Date(timeIntervalSinceNow: -3600),
                                                     Date(timeIntervalSinceNow: 3600)])
     var dateArray: [Date]
+    
+    @UserDefault(keyPath: \.dataArrayKey, default: [Data([6, 7, 1, 7, 1, 3, 7]),
+                                                    Data([3, 3, 6, 5, 6, 1, 5])])
+    var dataArray: [Data]
     
     @UserDefault(keyPath: \.codableArrayKey, default: [CustomCodable.random(),
                                                        CustomCodable.random(),
@@ -84,6 +97,14 @@ final class AnyUserDefaultsTests: XCTestCase {
         XCTAssert(double == newValue)
     }
     
+    func testBool() {
+        _bool.remove()
+        XCTAssert(bool == _bool.defaultValue)
+        let newValue = Bool.random()
+        bool = newValue
+        XCTAssert(bool == newValue)
+    }
+    
     func testURL() {
         _url.remove()
         XCTAssert(url == _url.defaultValue)
@@ -106,6 +127,14 @@ final class AnyUserDefaultsTests: XCTestCase {
         let newValue = Date()
         date = newValue
         XCTAssert(date == newValue)
+    }
+    
+    func testData() {
+        _data.remove()
+        XCTAssert(data == _data.defaultValue)
+        let newValue = Data((0..<100).map { _ in UInt8.random(in: UInt8.min...UInt8.max)} )
+        data = newValue
+        XCTAssert(data == newValue)
     }
     
     func testCodable() {
@@ -148,6 +177,14 @@ final class AnyUserDefaultsTests: XCTestCase {
         XCTAssert(doubleArray == newValue)
     }
     
+    func testBoolArray() {
+        _boolArray.remove()
+        XCTAssert(boolArray == _boolArray.defaultValue)
+        let newValue = (0..<100).map { _ in Bool.random() }
+        boolArray = newValue
+        XCTAssert(boolArray == newValue)
+    }
+    
     func testStringArray() {
         _stringArray.remove()
         XCTAssert(stringArray == _stringArray.defaultValue)
@@ -177,6 +214,17 @@ final class AnyUserDefaultsTests: XCTestCase {
         XCTAssert(dateArray == newValue)
     }
     
+    func testDataArray() {
+        _dataArray.remove()
+        XCTAssert(dataArray == _dataArray.defaultValue)
+        var newValue = [Data]()
+        for _ in 0..<10 {
+            newValue.append(Data((0..<100).map { _ in UInt8.random(in: UInt8.min...UInt8.max)} ))
+        }
+        dataArray = newValue
+        XCTAssert(dataArray == newValue)
+    }
+    
     func testCodableArray() {
         _codableArray.remove()
         XCTAssert(codableArray == _codableArray.defaultValue)
@@ -197,18 +245,24 @@ final class AnyUserDefaultsTests: XCTestCase {
         ("testInt", testInt),
         ("testFloat", testFloat),
         ("testDouble", testDouble),
+        ("testBool", testBool),
         ("testURL", testURL),
         ("testString", testString),
         ("testDate", testDate),
+        ("testData", testData),
         ("testCodable", testCodable),
+        ("testRawRepresentable", testRawRepresentable),
         
         ("testIntArray", testIntArray),
         ("testFloatArray", testFloatArray),
         ("testDoubleArray", testDoubleArray),
+        ("testBoolArray", testBoolArray),
         ("testStringArray", testStringArray),
         ("testURLArray", testURLArray),
         ("testDateArray", testDateArray),
+        ("testDataArray", testDataArray),
         ("testCodableArray", testCodableArray),
+        ("testRawRepresentableArray", testRawRepresentableArray),
     ]
 }
 
@@ -217,9 +271,11 @@ extension DefaultKeyStore {
     var intKey: DefaultKey<Int> { .init("int_key") }
     var floatKey: DefaultKey<Float> { .init("float_key") }
     var doubleKey: DefaultKey<Double> { .init("double_key") }
+    var boolKey: DefaultKey<Bool> { .init("bool_key") }
     var urlKey: DefaultKey<URL> { .init("url_key")}
     var stringKey: DefaultKey<String> { .init("string_key") }
     var dateKey: DefaultKey<Date> { .init("date_key") }
+    var dataKey: DefaultKey<Data> { .init("data_key") }
     var dictronaryKey: DefaultKey<[String: Any]> { .init("dictronary_key") }
     var codableKey: DefaultKey<CustomCodable> { .init("custom_codable_key") }
     var rawRepresentableKey: DefaultKey<CustomRawRepresentable> { .init("rawrepresentable_key") }
@@ -227,9 +283,11 @@ extension DefaultKeyStore {
     var intArrayKey: DefaultKey<[Int]> { .init("int_array_key") }
     var floatArrayKey: DefaultKey<[Float]> { .init("float_array_key") }
     var doubleArrayKey: DefaultKey<[Double]> { .init("double_array_key") }
+    var boolArrayKey: DefaultKey<[Bool]> { .init("bool_array_key") }
     var stringArrayKey: DefaultKey<[String]> { .init("string_array_key") }
     var urlArrayKey: DefaultKey<[URL]> { .init("url_array_key") }
     var dateArrayKey: DefaultKey<[Date]> { .init("date_array_key") }
+    var dataArrayKey: DefaultKey<[Data]> { .init("data_array_key") }
     var codableArrayKey: DefaultKey<[CustomCodable]> { .init("codable_array_key") }
     var rawRepresentableArrayKey: DefaultKey<[CustomRawRepresentable]> { .init("rawrepresentable_array_key") }
 }

@@ -53,6 +53,19 @@ extension Double: DefaultArrayValue {
     }
 }
 
+// MARK: - Bool
+
+extension Bool: DefaultArrayValue {
+    
+    public static func writeArray(value: [Bool]?, for key: String, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+    
+    public static func readArray(for key: String, userDefaults: UserDefaults) -> [Bool]? {
+        return userDefaults.array(forKey: key) as? [Bool]
+    }
+}
+
 // MARK: - String
 
 extension String: DefaultArrayValue {
@@ -107,6 +120,19 @@ extension Date: DefaultArrayValue {
     
     public static func readArray(for key: String, userDefaults: UserDefaults) -> [Date]? {
         return userDefaults.array(forKey: key) as? [Date]
+    }
+}
+
+// MARK: - Data
+
+extension Data: DefaultArrayValue {
+    
+    public static func writeArray(value: [Data]?, for key: String, userDefaults: UserDefaults) {
+        userDefaults.set(value, forKey: key)
+    }
+    
+    public static func readArray(for key: String, userDefaults: UserDefaults) -> [Data]? {
+        return userDefaults.array(forKey: key) as? [Data]
     }
 }
 
