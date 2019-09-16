@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     @UserDefault(keyPath: \DefaultKeyStore.usernameKey, default: "Admin")
     var userName: String
 
-    @UserDetault(keyPath: \DefaultKeyStore.passwordKey, default: "12345678")
+    @UserDefault(keyPath: \DefaultKeyStore.passwordKey, default: "12345678")
     var password: String
 }
 ```
