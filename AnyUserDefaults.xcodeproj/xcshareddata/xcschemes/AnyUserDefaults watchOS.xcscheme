@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A010E055232F1F010003E524"
+               BlueprintIdentifier = "A099CC2E232F26FC0023CC3D"
                BuildableName = "AnyUserDefaults.framework"
-               BlueprintName = "AnyUserDefaults"
+               BlueprintName = "AnyUserDefaults watchOS"
                ReferencedContainer = "container:AnyUserDefaults.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A010E05E232F1F010003E524"
-               BuildableName = "AnyUserDefaultsTests.xctest"
-               BlueprintName = "AnyUserDefaultsTests"
-               ReferencedContainer = "container:AnyUserDefaults.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -60,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A010E055232F1F010003E524"
+            BlueprintIdentifier = "A099CC2E232F26FC0023CC3D"
             BuildableName = "AnyUserDefaults.framework"
-            BlueprintName = "AnyUserDefaults"
+            BlueprintName = "AnyUserDefaults watchOS"
             ReferencedContainer = "container:AnyUserDefaults.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
