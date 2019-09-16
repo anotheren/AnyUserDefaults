@@ -72,6 +72,7 @@ extension UserDefault where KeyStore == CustomKeyStore {
 ```
 
 Use your `CustomKeyStore` to bind your property
+
 ```swift
 class SomeViewController: UIViewController {
 
@@ -98,7 +99,8 @@ Use `DefaultValue` protocol for single value, and use `DefaultArrayValue` protoc
 | RawRepresentable| [RawRepresentable]| RawValue: DefaultValue |
 
 Custom Codable Type Example:
-```
+
+```swift
 struct MyCodableType: Codable, DefaultArrayValue {
 
     var a: Int
@@ -107,7 +109,8 @@ struct MyCodableType: Codable, DefaultArrayValue {
 ```
 
 Custom RawRepresentable Type Example:
-```
+
+```swift
 enum MyRawRepresentableType: Int, DefaultValue {
 
     case first
