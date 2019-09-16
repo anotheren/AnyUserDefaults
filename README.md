@@ -13,7 +13,8 @@ AnyUserDefaults is a Morden UserDefaults wapper for Swift. Especially the [`prop
 ### Basic Usage
 
 You can just extension `DefaultKeyStore` as Default KeyStore
-``` 
+
+```swift
 extension DefaultKeyStore {
     
     var usernameKey: DefaultKey<String> { .init("username_key") }
@@ -23,7 +24,8 @@ extension DefaultKeyStore {
 ```
 
 Then, use `@UserDefault` to bind your property to UserDefaults, which will auto **Read**, **Write**, or do some **Type Check**
-```
+
+```swift
 class LoginViewController: UIViewController {
 
     @UserDefault(keyPath: \DefaultKeyStore.usernameKey, default: "Admin")
@@ -39,7 +41,8 @@ class LoginViewController: UIViewController {
 When you want to use your custom KeyStore instand of default one, or want to share UseDefaults Data between main applicaiotn and application extensions
 
 Create your custom KeyStore first
-```
+
+```swift
 struct CustomKeyStore {
 
     var lastLaunchDateKey: DefaultKey<Date> { .init("last_launch_date_key") }
@@ -47,7 +50,8 @@ struct CustomKeyStore {
 ```
 
 Create your custom DefaultAdaptor
-```
+
+```swift
 typealias CustomDefaultAdapter = DefaultAdapter<CustomKeyStore>
 
 extension CustomDefaultAdapter {
@@ -57,7 +61,8 @@ extension CustomDefaultAdapter {
 ```
 
 Create UserDefault extension for your `CustomKeyStore`
-```
+
+```swift
 extension UserDefault where KeyStore == CustomKeyStore {
     
     init(keyPath: KeyPath<CustomKeyStore, DefaultKey<Value>>, default value: Value, policy: DefaultPolicy = []) {
@@ -67,7 +72,7 @@ extension UserDefault where KeyStore == CustomKeyStore {
 ```
 
 Use your `CustomKeyStore` to bind your property
-```
+```swift
 class SomeViewController: UIViewController {
 
     @UserDefault(keyPath: \CustomKeyStore.lastLaunchDateKey, default: Date())
@@ -115,21 +120,29 @@ enum MyRawRepresentableType: Int, DefaultValue {
 
 ### CocoaPods
 
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Alamofire into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate AnyUserDefaults into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
+```ruby
+pod 'AnyUserDefaults', '~> 1.0.1'
 ```
-pod 'AnyUserDefaults', '~> 1.0.0'
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate AnyUserDefaults into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "anotheren/AnyUserDefaults", '~> 1.0.1'
 ```
 
 ### Swift Package Manager
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the swift compiler. It is in early development, but Alamofire does support its use on supported platforms.
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the swift compiler. 
 
 Once you have your Swift package set up, adding AnyUserDefaults as a dependency is as easy as adding it to the dependencies value of your Package.swift.
 
-```
+```swift
 dependencies: [
-    .package(url: "https://github.com/anotheren/AnyUserDefaults.git", from: "1.0.0")
+    .package(url: "https://github.com/anotheren/AnyUserDefaults.git", from: "1.0.1")
 ]
 ```
 
