@@ -25,7 +25,7 @@ extension UserDefaults {
 
 extension UserDefaults {
     
-    func has<Value>(for key: DefaultKey<Value>) -> Bool {
+    func hasValue<Value>(for key: DefaultKey<Value>) -> Bool {
         return read(for: key) != nil
     }
     

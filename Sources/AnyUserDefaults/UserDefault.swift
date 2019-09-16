@@ -48,6 +48,10 @@ public struct UserDefault<KeyStore, Value> where Value: DefaultValue {
 
 extension UserDefault {
     
+    public func hasValue() -> Bool {
+        return adapter.hasValue(for: key)
+    }
+    
     public func remove() {
         adapter.remove(for: key)
     }

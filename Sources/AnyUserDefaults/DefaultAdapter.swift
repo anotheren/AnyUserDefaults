@@ -52,16 +52,16 @@ extension DefaultAdapter {
 
 extension DefaultAdapter {
     
-    func has<Value>(for key: DefaultKey<Value>) -> Bool where Value: DefaultValue {
-        return userDefaults.has(for: key)
+    func hasValue<Value>(for key: DefaultKey<Value>) -> Bool where Value: DefaultValue {
+        return userDefaults.hasValue(for: key)
     }
     
     func remove<Value>(for key: DefaultKey<Value>) where Value: DefaultValue {
         userDefaults.remove(for: key)
     }
     
-    public func has<Value>(at keyPath: KeyPath<KeyStore, DefaultKey<Value>>) -> Bool where Value: DefaultValue {
-        return has(for: keyStore[keyPath: keyPath])
+    public func hasValue<Value>(at keyPath: KeyPath<KeyStore, DefaultKey<Value>>) -> Bool where Value: DefaultValue {
+        return hasValue(for: keyStore[keyPath: keyPath])
     }
     
     public func remove<Value>(at keyPath: KeyPath<KeyStore, DefaultKey<Value>>) {
