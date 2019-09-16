@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'AnyUserDefaults'
-    s.version = '1.0.0'
+    s.version = '1.0.1'
     s.license = 'MIT'
     s.summary = 'AnyUserDefaults is a Morden UserDefaults wapper for Swift'
     s.homepage = 'https://github.com/anotheren/AnyUserDefaults'

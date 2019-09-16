@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A099CC44232F29C60023CC3D"
-               BuildableName = "AnyUserDefaults_tvOS.framework"
+               BuildableName = "AnyUserDefaults.framework"
                BlueprintName = "AnyUserDefaults tvOS"
                ReferencedContainer = "container:AnyUserDefaults.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A099CC44232F29C60023CC3D"
-            BuildableName = "AnyUserDefaults_tvOS.framework"
+            BuildableName = "AnyUserDefaults.framework"
             BlueprintName = "AnyUserDefaults tvOS"
             ReferencedContainer = "container:AnyUserDefaults.xcodeproj">
          </BuildableReference>
